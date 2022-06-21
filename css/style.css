@@ -3766,7 +3766,7 @@ textarea.input {
 @media (any-hover: hover) {
   .home-review__dots .swiper-pagination-bullet-active:hover {
     cursor: default;
-    opacity: 1;
+    opacity: 1 !important;
   }
 }
 .home-review__content {
