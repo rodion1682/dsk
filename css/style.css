@@ -2473,6 +2473,122 @@ textarea.input {
 .image-viewer__image-ibg {
   padding-bottom: 75%;
 }
+.image-viewer__controls {
+  display: flex;
+}
+@supports (gap: clamp( 0.9375rem , 0.3125rem  +  1.3020833333vw , 1.875rem )) {
+  .image-viewer__controls {
+    gap: clamp( 0.9375rem , 0.3125rem  +  1.3020833333vw , 1.875rem );
+  }
+}
+@supports not (gap: clamp( 0.9375rem , 0.3125rem  +  1.3020833333vw , 1.875rem )) {
+  .image-viewer__controls {
+    gap: calc(0.9375rem + 0.9375 * (100vw - 48rem) / 72);
+  }
+}
+.image-viewer__arrow {
+  z-index: 5;
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.3125rem;
+  transition: background-color 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  border: 0.0625rem solid #777;
+  color: #777;
+}
+@supports (font-size: clamp( 0.9375rem , 0.7291666667rem  +  0.4340277778vw , 1.25rem )) {
+  .image-viewer__arrow {
+    font-size: clamp( 0.9375rem , 0.7291666667rem  +  0.4340277778vw , 1.25rem );
+  }
+}
+@supports not (font-size: clamp( 0.9375rem , 0.7291666667rem  +  0.4340277778vw , 1.25rem )) {
+  .image-viewer__arrow {
+    font-size: calc(0.9375rem + 0.3125 * (100vw - 48rem) / 72);
+  }
+}
+@supports (min-width: clamp( 2.5rem , 2.0833333333rem  +  0.8680555556vw , 3.125rem )) {
+  .image-viewer__arrow {
+    min-width: clamp( 2.5rem , 2.0833333333rem  +  0.8680555556vw , 3.125rem );
+  }
+}
+@supports not (min-width: clamp( 2.5rem , 2.0833333333rem  +  0.8680555556vw , 3.125rem )) {
+  .image-viewer__arrow {
+    min-width: calc(2.5rem + 0.625 * (100vw - 48rem) / 72);
+  }
+}
+@supports (width: clamp( 2.5rem , 2.0833333333rem  +  0.8680555556vw , 3.125rem )) {
+  .image-viewer__arrow {
+    width: clamp( 2.5rem , 2.0833333333rem  +  0.8680555556vw , 3.125rem );
+  }
+}
+@supports not (width: clamp( 2.5rem , 2.0833333333rem  +  0.8680555556vw , 3.125rem )) {
+  .image-viewer__arrow {
+    width: calc(2.5rem + 0.625 * (100vw - 48rem) / 72);
+  }
+}
+@supports (height: clamp( 2.5rem , 2.0833333333rem  +  0.8680555556vw , 3.125rem )) {
+  .image-viewer__arrow {
+    height: clamp( 2.5rem , 2.0833333333rem  +  0.8680555556vw , 3.125rem );
+  }
+}
+@supports not (height: clamp( 2.5rem , 2.0833333333rem  +  0.8680555556vw , 3.125rem )) {
+  .image-viewer__arrow {
+    height: calc(2.5rem + 0.625 * (100vw - 48rem) / 72);
+  }
+}
+@media (any-hover: hover) {
+  .image-viewer__arrow:hover {
+    background-color: #777;
+    color: #fff;
+  }
+}
+.image-viewer__arrow_left::before {
+  transform: rotate(-90deg);
+}
+.image-viewer__arrow_right::before {
+  transform: rotate(90deg);
+}
+.image-viewer__range {
+  cursor: pointer;
+  flex: 1 1 auto;
+  position: relative;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+@media (any-hover: hover) {
+  .image-viewer__range:hover::-webkit-slider-runnable-track {
+    background-color: transparent;
+    border: 0.125rem solid #777;
+  }
+}
+.image-viewer__range::-webkit-slider-runnable-track {
+  background-color: #777;
+  height: 0.375rem;
+  border: 0.125rem solid transparent;
+  transition: all 0.3s ease 0s;
+  border-radius: 0.1875rem;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.image-viewer__range::-webkit-slider-thumb {
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #eebf99;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 50%;
+  transform: translate(0px, -45%);
+}
+
 .our-product__top {
   display: flex;
   justify-content: space-between;
@@ -4611,6 +4727,9 @@ textarea.input {
   padding: 0rem;
 }
 @media (any-hover: hover) {
+  .body-catalog__items.list .procuts-item {
+    box-shadow: none;
+  }
   .body-catalog__items.list .procuts-item:hover {
     box-shadow: none;
   }
@@ -4714,9 +4833,9 @@ textarea.input {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  box-shadow: none;
+  box-shadow: none !important;
   position: relative;
-  bottom: auto;
+  bottom: auto !important;
   padding: 0rem;
 }
 @supports (margin-top: clamp( 1.5625rem , 1.2378246753rem  +  1.6233766234vw , 3.125rem )) {

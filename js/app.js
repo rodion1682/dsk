@@ -1497,26 +1497,6 @@
                 document.documentElement.classList.add(className);
             }));
         }
-        let isMobile = {
-            Android: function() {
-                return navigator.userAgent.match(/Android/i);
-            },
-            BlackBerry: function() {
-                return navigator.userAgent.match(/BlackBerry/i);
-            },
-            iOS: function() {
-                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-            },
-            Opera: function() {
-                return navigator.userAgent.match(/Opera Mini/i);
-            },
-            Windows: function() {
-                return navigator.userAgent.match(/IEMobile/i);
-            },
-            any: function() {
-                return isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows();
-            }
-        };
         function functions_getHash() {
             if (location.hash) return location.hash.replace("#", "");
         }
@@ -8003,130 +7983,34 @@ PERFORMANCE OF THIS SOFTWARE.
         };
         const da = new DynamicAdapt("max");
         da.init();
-        document.addEventListener("click", documentActions);
-        document.addEventListener("keydown", documentKeydown);
-        function documentActions(e) {
-            const targetElement = e.target;
-            if (window.innerWidth > 992 || isMobile.any()) {
-                if (targetElement.classList.contains("top-header__main-link")) targetElement.closest(".top-header__item").classList.toggle("_hover");
-                if (!targetElement.closest(".top-header__main-link")) document.querySelector(".top-header__item").classList.remove("_hover");
+        let script_images = document.querySelectorAll(".image-viewer__img");
+        const range = document.querySelector(".image-viewer__range");
+        const plus = document.querySelector(".image-viewer__arrow_left");
+        const minus = document.querySelector(".image-viewer__arrow_right");
+        range.style.position = "relative";
+        range.value = 0;
+        range.max = script_images.length - 1;
+        range.min = 0;
+        for (let index = 0; index < script_images.length; index++) {
+            const element = script_images[index];
+            element.hidden = true;
+            if (0 === index) element.hidden = false;
+        }
+        range.oninput = function() {
+            console.log(range.value);
+            for (let index = 0; index < script_images.length; index++) {
+                const element = script_images[index];
+                element.hidden = true;
+                if (Number(range.value) === index) element.hidden = false; else element.hidden = true;
             }
-        }
-        function documentKeydown(e) {
-            const targetElement = e.code;
-            if ("Escape" === targetElement) document.querySelector(".top-header__item").classList.remove("_hover");
-        }
-        let counter_first = document.querySelector(".countdown-slider__counter_first");
-        if (counter_first) {
-            const days = document.querySelector("#days_first");
-            const hours = document.querySelector("#hours_first");
-            const minutes = document.querySelector("#minutes_first");
-            const seconds = document.querySelector("#seconds_first");
-            const dataTime = counter_first.getAttribute("data-time_first");
-            const targetYear = new Date(dataTime);
-            console.log(targetYear);
-            function updateCounter() {
-                const currentTime = new Date;
-                const difference = targetYear - currentTime;
-                const daysLeft = Math.floor(difference / 1e3 / 60 / 60 / 24);
-                const hoursLeft = Math.floor(difference / 1e3 / 60 / 60) % 24;
-                const minutesLeft = Math.floor(difference / 1e3 / 60) % 60;
-                const secondsLeft = Math.floor(difference / 1e3) % 60;
-                console.log(daysLeft, hoursLeft, minutesLeft, secondsLeft);
-                days.innerText = daysLeft < 10 ? "0" + daysLeft : daysLeft;
-                hours.innerText = hoursLeft < 10 ? "0" + hoursLeft : hoursLeft;
-                minutes.innerText = minutesLeft < 10 ? "0" + minutesLeft : minutesLeft;
-                seconds.innerText = secondsLeft < 10 ? "0" + secondsLeft : secondsLeft;
-            }
-            updateCounter();
-            setInterval(updateCounter, 1e3);
-        }
-        let counter_second = document.querySelector(".countdown-slider__counter_second");
-        if (counter_second) {
-            const days = document.querySelector("#days_second");
-            const hours = document.querySelector("#hours_second");
-            const minutes = document.querySelector("#minutes_second");
-            const seconds = document.querySelector("#seconds_second");
-            const dataTime = counter_second.getAttribute("data-time_second");
-            const targetYear = new Date(dataTime);
-            console.log(targetYear);
-            function updateCounter() {
-                const currentTime = new Date;
-                const difference = targetYear - currentTime;
-                const daysLeft = Math.floor(difference / 1e3 / 60 / 60 / 24);
-                const hoursLeft = Math.floor(difference / 1e3 / 60 / 60) % 24;
-                const minutesLeft = Math.floor(difference / 1e3 / 60) % 60;
-                const secondsLeft = Math.floor(difference / 1e3) % 60;
-                console.log(daysLeft, hoursLeft, minutesLeft, secondsLeft);
-                days.innerText = daysLeft < 10 ? "0" + daysLeft : daysLeft;
-                hours.innerText = hoursLeft < 10 ? "0" + hoursLeft : hoursLeft;
-                minutes.innerText = minutesLeft < 10 ? "0" + minutesLeft : minutesLeft;
-                seconds.innerText = secondsLeft < 10 ? "0" + secondsLeft : secondsLeft;
-            }
-            updateCounter();
-            setInterval(updateCounter, 1e3);
-        }
-        let counter_third = document.querySelector(".countdown-slider__counter_third");
-        if (counter_third) {
-            const days = document.querySelector("#days_third");
-            const hours = document.querySelector("#hours_third");
-            const minutes = document.querySelector("#minutes_third");
-            const seconds = document.querySelector("#seconds_third");
-            const dataTime = counter_third.getAttribute("data-time_third");
-            const targetYear = new Date(dataTime);
-            console.log(targetYear);
-            function updateCounter() {
-                const currentTime = new Date;
-                const difference = targetYear - currentTime;
-                const daysLeft = Math.floor(difference / 1e3 / 60 / 60 / 24);
-                const hoursLeft = Math.floor(difference / 1e3 / 60 / 60) % 24;
-                const minutesLeft = Math.floor(difference / 1e3 / 60) % 60;
-                const secondsLeft = Math.floor(difference / 1e3) % 60;
-                console.log(daysLeft, hoursLeft, minutesLeft, secondsLeft);
-                days.innerText = daysLeft < 10 ? "0" + daysLeft : daysLeft;
-                hours.innerText = hoursLeft < 10 ? "0" + hoursLeft : hoursLeft;
-                minutes.innerText = minutesLeft < 10 ? "0" + minutesLeft : minutesLeft;
-                seconds.innerText = secondsLeft < 10 ? "0" + secondsLeft : secondsLeft;
-            }
-            updateCounter();
-            setInterval(updateCounter, 1e3);
-        }
-        const catalogButtons = document.querySelectorAll(".body-catalog__button");
-        const catalogItems = document.querySelector(".body-catalog__items");
-        if (catalogButtons.length > 0 && catalogItems) for (let index = 0; index < catalogButtons.length; index++) {
-            const catalogButton = catalogButtons[index];
-            catalogButton.addEventListener("click", (function(e) {
-                if (catalogButton.classList.contains("body-catalog__button_grid")) {
-                    document.querySelector(".body-catalog__button_list").classList.remove("active");
-                    catalogButton.classList.add("active");
-                    catalogItems.classList.add("grid");
-                    catalogItems.classList.remove("list");
-                }
-                if (catalogButton.classList.contains("body-catalog__button_list")) {
-                    document.querySelector(".body-catalog__button_grid").classList.remove("active");
-                    catalogButton.classList.add("active");
-                    catalogItems.classList.remove("grid");
-                    catalogItems.classList.add("list");
-                }
-            }));
-        }
-        function onClassChange(element, callback) {
-            const observer = new MutationObserver((mutations => {
-                mutations.forEach((mutation => {
-                    if ("attributes" === mutation.type && "class" === mutation.attributeName) callback(mutation.target);
-                }));
-            }));
-            observer.observe(element, {
-                attributes: true
-            });
-            return observer.disconnect;
-        }
-        let itemToWatch = document.querySelector(".header");
-        let headerBottom = document.querySelector(".header__bottom");
-        headerBottom.classList.add("_static-no-padding");
-        onClassChange(itemToWatch, (el => {
-            el = headerBottom;
-            if (itemToWatch.classList.contains("_header-scroll")) el.classList.remove("_static-no-padding"); else el.classList.add("_static-no-padding");
+        };
+        plus.addEventListener("click", (function() {
+            range.value++;
+            range.oninput();
+        }));
+        minus.addEventListener("click", (function() {
+            range.value--;
+            range.oninput();
         }));
         window["FLS"] = false;
         isWebp();
